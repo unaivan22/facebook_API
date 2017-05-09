@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="">
+	<title>Facebook API</title>
+</head>
+<body>
+	<script>
+		//setup faceboock js sdk default
+		window.fbAsyncInit = function() {
+		    FB.init({
+		      appId      : '1498632456848042',
+		      xfbml      : true,
+		      version    : 'v2.9'
+		    });
+		    FB.AppEvents.logPageView();
+		    
+		     FB.getLoginStatus(function(response) {
+		    	if (response.status === 'connected') {
+		    		document.getElementById('status').innerHTML = 'connected.';
+		    		document.getElementById('login').style.visibility = 'hidden';
+		    	} else if (response.status === 'not_authorized') {
+		    		document.getElementById('status').innerHTML = 'gagal masuk facebook.'
+		    	} else {
+		    		document.getElementById('status').innerHTML = 'Berhasil masuk ke Facebook';
+		    	}
+		    });
+		};
+
+		(function(d, s, id){
+		    var js, fjs = d.getElementsByTagName(s)[0];
+		    if (d.getElementById(id)) {return;}
+		    js = d.createElement(s); js.id = id;
+		    js.src = "//connect.facebook.net/en_US/sdk.js";
+		    fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+		
+		function login() {
+			FB.login(function(response) {
+				if (response.status === 'connected') {
+		    		document.getElementById('status').innerHTML = 'connected.';
+		    		document.getElementById('login').style.visibility = 'hidden';
+		    	} else if (response.status === 'not_authorized') {
+		    		document.getElementById('status').innerHTML = 'gagal masuk facebook'
+		    	} else {
+		    		document.getElementById('status').innerHTML = 'Berhasil masuk ke Facebook';
+		    	}
+			}, {scope: 'publish_actions'});
+		}
+
+		// mendapatkan dan menampilkan basic user info
+		function getInfo() {
+			FB.api('/me', 'GET', {fields: 'first_name,last_name,name,id'}, function(response) {
+				document.getElementById('status').innerHTML = response.id;
+			});
+		}
+
+		// posting status pada timeline
+		function post() {
+			FB.api('/me/feed', 'post', {message: 'my first facebook API'}, function(response) {
+				document.getElementById('status').innerHTML = response.id;
+			});
+		}
+
+	</script>
+
+	<div id="status"></div>
+	<button onclick="getInfo()">Info Profil</button>
+	<button onclick="post()">Post Ke Beranda</button>
+	<button onclick="login()" id="login">Login</button>
+</body>
+</html>
