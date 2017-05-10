@@ -6,6 +6,24 @@
 	<meta http-equiv="">
 	<title>Facebook API</title>
 </head>
+<style>
+	.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.button2 {background-color: #008CBA;border-radius: 30px;} /* Blue */
+.button3 {background-color: #f44336; border-radius: 30px;} /* Red */ 
+/*.button4 {background-color: #e7e7e7; color: black;} */ 
+.button5 {background-color: #555555; border-radius: 30px;} /* Black */
+</style>
 <body>
 	<script>
 		//setup faceboock js sdk default
@@ -24,7 +42,7 @@
 		    	} else if (response.status === 'not_authorized') {
 		    		document.getElementById('status').innerHTML = 'gagal masuk facebook.'
 		    	} else {
-		    		document.getElementById('status').innerHTML = 'Berhasil masuk ke Facebook';
+		    		document.getElementById('status').innerHTML = 'Facebook';
 		    	}
 		    });
 		};
@@ -45,7 +63,7 @@
 		    	} else if (response.status === 'not_authorized') {
 		    		document.getElementById('status').innerHTML = 'gagal masuk facebook'
 		    	} else {
-		    		document.getElementById('status').innerHTML = 'Berhasil masuk ke Facebook';
+		    		document.getElementById('status').innerHTML = 'Facebook';
 		    	}
 			}, {scope: 'publish_actions'});
 		}
@@ -65,10 +83,9 @@
 		}
 
 	</script>
-
 	<div id="status"></div>
-	<button onclick="getInfo()">Info Profil</button>
-	<button onclick="post()">Post Ke Beranda</button>
-	<button onclick="login()" id="login">Login</button>
+	<button class="button button2" onclick="getInfo()">Info Profil</button>
+	<button class="button button3" onclick="post()">Post Ke Beranda</button>
+	<button class="button button5" onclick="login()" id="login">Login</button>
 </body>
 </html>
